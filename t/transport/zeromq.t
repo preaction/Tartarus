@@ -13,6 +13,7 @@ my $endpoint = 'ipc://' . $fname;
 my $xport = Tartarus::Transport::ZeroMQ->new(
     endpoint => $endpoint,
 );
+diag "ZeroMQ version: " . join ".", $xport->_ctx->version;
 
 subtest 'send' => sub {
 
@@ -35,7 +36,7 @@ subtest 'send' => sub {
         }
     };
 
-    my $t = AE::timer 1, 0, sub {
+    my $t = AE::timer 3, 0, sub {
         fail "Timeout reached";
         $cv->send;
     };
@@ -65,7 +66,7 @@ subtest 'recv' => sub {
         }
     };
 
-    my $t = AE::timer 1, 0, sub {
+    my $t = AE::timer 3, 0, sub {
         fail "Timeout reached";
         $cv->send;
     };
