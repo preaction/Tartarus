@@ -22,7 +22,7 @@ my @class_common = (
 
 our %IMPORT_BUNDLES = (
     Test => [
-        qw( Test::More ),
+        qw( Test::More Test::Deep ),
     ],
 
     Class => [
