@@ -16,6 +16,8 @@ before_install:
     - source ~/travis-perl-helpers/init
     - build-perl
     - perl -V
+    - cpan-install Alien::ZMQ
+    - export LD_LIBRARY_PATH=$( perl -MAlien::ZMQ -e'print Alien::ZMQ::lib_dir' ):$LD_LIBRARY_PATH
     - build-dist
     - cd $BUILD_DIR
 

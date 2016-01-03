@@ -19,8 +19,11 @@ requires 'new';
 
 =method recv
 
-Receive an incoming message. Returns a set of bytes suitable to be
-L<decoded by a codec|Tartarus::Codec/decode>.
+    my ( $from, $bytes ) = $xport->recv;
+
+Receive an incoming message and the identity of the sender. Returns
+a set of bytes suitable to be L<decoded by
+a codec|Tartarus::Codec/decode>.
 
 =cut
 
@@ -28,8 +31,10 @@ requires 'recv';
 
 =method send
 
-Send an outgoing message. Requires a set of bytes L<encoded by
-a codec|Tartarus::Codec/encode>.
+    $xport->send( $to => $bytes );
+
+Send an outgoing message to the given client. Requires a set of bytes
+L<encoded by a codec|Tartarus::Codec/encode>.
 
 =cut
 
@@ -43,5 +48,14 @@ call L</recv> to receive them.
 =cut
 
 requires 'fh';
+
+=method can_read
+
+Returns true if we can read from the L<filehandle|/fh>. Reading is done
+with L<the recv() method|/recv>.
+
+=cut
+
+requires 'can_read';
 
 1;
