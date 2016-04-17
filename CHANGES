@@ -1,0 +1,13 @@
+Changelog for Tartarus
+
+0.001 2016-04-17T02:03:27
+ - update dist.ini with better readme and pod handling
+ - add some initial overview documentation
+ - expand test timeouts to try to fix travis failure
+ - add zeromq transport
+ - add prereqs used so far
+ - only support 5.20
+ - add sereal message type
+ - add inital design / class layout
+ - Minting dist
+
