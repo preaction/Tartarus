@@ -3,6 +3,10 @@ package Tartarus::Message::Sereal;
 
 =head1 SYNOPSIS
 
+    # tartarus.yml
+    message:
+        $class: Tartarus::Message::Sereal
+
 =head1 DESCRIPTION
 
 This message is encoded/decoded with Sereal, a message format produced

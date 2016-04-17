@@ -3,7 +3,22 @@ package Tartarus::Message;
 
 =head1 SYNOPSIS
 
+    package My::Message;
+    use Moo;
+    with 'Tartarus::Message';
+
+    sub encode; # Encode the message into bytes
+    sub decode; # Decode the message from the given bytes
+
 =head1 DESCRIPTION
+
+C<Tartarus::Message> is the base role for all Tartarus message
+serializers.  Serialized messages are sent out over L<Tartarus
+transports|Tartarus::Transport>.
+
+Messages define the structure of the data. Different data sources may
+produce different messages. Data sources that use the same message can
+be easily exchanged, replaced, and worked with in the same way.
 
 =cut
 

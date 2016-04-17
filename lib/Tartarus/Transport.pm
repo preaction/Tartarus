@@ -3,7 +3,22 @@ package Tartarus::Transport;
 
 =head1 SYNOPSIS
 
+    package My::Transport;
+    use Moo;
+    with 'Tartarus::Transport';
+
+    sub recv;       # Recieve an incoming message
+    sub send;       # Send an outgoing message
+    sub fh;         # Filehandle to poll for incoming messages
+    sub can_read;   # Returns true if more messages can be read
+
 =head1 DESCRIPTION
+
+A C<Tartarus::Transport> is a method of communicating with clients.
+Transports include zeromq, nanomsg, WebSockets, or plain TCP sockets.
+
+Transports accept and return bytes which can be inflated by
+L<Tartarus::Message>.
 
 =cut
 
