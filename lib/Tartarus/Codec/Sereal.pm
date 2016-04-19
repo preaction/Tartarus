@@ -17,7 +17,6 @@ speed in Perl.
 
 use Tartarus::Base 'Class';
 use Sereal qw( encode_sereal decode_sereal );
-with 'Tartarus::Message';
 
 =method encode
 
@@ -43,7 +42,8 @@ Create a message from the given bytes.
 
 sub decode {
     my ( $self, $bytes ) = @_;
-    return decode_sereal( $bytes );
+    my $msg = decode_sereal( $bytes );
+    return $msg->{type}->new( %$msg );
 }
 
 1;

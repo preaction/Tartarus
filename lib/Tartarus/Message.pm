@@ -24,6 +24,20 @@ XXX The individual message types will be listed here.
 =cut
 
 use Tartarus::Base 'Class';
+use Data::UUID;
+use Scalar::Util qw( blessed );
+
+=attr id
+
+The ID of the message. Generated automatically if necessary.
+
+=cut
+
+has id => (
+    is => 'ro',
+    isa => Str,
+    default => sub { Data::UUID->new->create },
+);
 
 =attr path
 
@@ -61,4 +75,49 @@ has query => (
     default => sub { {} },
 );
 
+=attr type
+
+The type of message. Auto-generated from the message object's class name.
+
+This is used to inflate the correct object on the other end. Libraries
+should not force users to set this.
+
+=cut
+
+has type => (
+    is => 'ro',
+    isa => Str,
+    default => sub { return blessed $_[0] },
+);
+
+=method head
+
+    my %head = $msg->head;
+
+Get the message header. The header includes the C<id>, C<path>, C<method>,
+and C<query> attributes.
+
+=cut
+
+sub head {
+    my ( $self ) = @_;
+    return (
+        map {; $_ => $self->$_ } qw( id path method query )
+    );
+}
+
+=method body
+
+    my %body = $msg->body;
+
+Get the message body. The message body depends on the type of message.
+This class defines no message body.
+
+=cut
+
+sub body {
+    return;
+}
+
 1;
+
