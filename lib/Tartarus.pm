@@ -17,8 +17,8 @@ package Tartarus;
     transport:
         $class: Tartarus::Transport::ZeroMQ
         endpoint: tcp://*:7000
-    message:
-        $class: Tartarus::Message::Sereal
+        codec:
+            $class: Tartarus::Codec::Sereal
 
     # Start the server
     tartarus [-f <config_file>]
@@ -59,11 +59,11 @@ Tartarus allows incoming connections via a transport, like ZeroMQ,
 nanomsg, HTTP, WebSockets, or plain TCP. Multiple transports can be
 configured, allowing multiple types of clients.
 
-=head2 Message
+=head2 Messages
 
-Tartarus messages can be serialized by one of many types of message
-format, including Sereal, Protocol Buffers, MessagePack, Cap'n Proto,
-JSON, BSON, and more.
+L<Tartarus messages|Tartarus::Message> can be serialized by one of many
+types of message format using a L<Tartarus::Codec>, including Sereal,
+Protocol Buffers, MessagePack, Cap'n Proto, JSON, BSON, and more.
 
 Tartarus messages create a common data structure so that different data
 sources can be used by the same program.
@@ -84,25 +84,15 @@ L<Tartarus::Transport>
 
 L<Tartarus::Message>
 
+=item *
+
+L<Tartarus::Codec>
+
 =back
 
 =cut
 
 use Tartarus::Base 'Class';
-
-=attr message
-
-    message:
-        $class: Tartarus::Message::Sereal
-
-The message type to use
-
-=cut
-
-has message => (
-    is => 'ro',
-    isa => ConsumerOf['Tartarus::Message'],
-);
 
 =attr transport
 
@@ -110,6 +100,8 @@ has message => (
         $class: Tartarus::Transport::ZeroMQ
         $args:
             endpoint: tcp://127.0.0.1:7000
+            codec:
+                $class: Tartarus::Codec::Sereal
 
 The transport layer to use
 

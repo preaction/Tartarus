@@ -24,6 +24,18 @@ L<Tartarus::Message>.
 
 use Tartarus::Base 'Role';
 
+=attr codec
+
+The L<codec|Tartarus::Codec> to use to encode/decode messages for this
+transport.
+
+=cut
+
+has codec => (
+    is => 'ro',
+    isa => ConsumerOf['Tartarus::Codec'],
+);
+
 =method new
 
 Create and configure the transport, setting up the sockets or otherwise.
