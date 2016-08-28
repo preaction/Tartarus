@@ -26,8 +26,8 @@ version 0.001
     transport:
         $class: Tartarus::Transport::ZeroMQ
         endpoint: tcp://*:7000
-    message:
-        $class: Tartarus::Message::Sereal
+        codec:
+            $class: Tartarus::Codec::Sereal
 
     # Start the server
     tartarus [-f <config_file>]
@@ -44,6 +44,34 @@ unified API makes simple data maintenance tasks trivial, allows for easy
 migration of data between backend data platforms, and enables
 scalability features like sharding and caching that the backend data
 platform may not support.
+
+## Database Agnostic
+
+Tartarus allows for easy querying of data from any kind of data source.
+Using Tartarus APIs, data can be moved from one data source to another
+with minimal effort.
+
+## Compatible with Any Language
+
+Tartarus allows requests in multiple formats over multiple types of
+transports. If you want to write data using JSON over WebSockets, and
+read data using Protobuf over ZeroMQ sockets, you can.
+
+## Data Events
+
+As requests and responses are made through Tartarus, events are generated
+that can be listened to. These event streams can trigger processing jobs,
+allowing you to respond to your data in real time.
+
+## Data On-The-Fly
+
+The Tartarus API is simple, which allows for easy extending. You can
+write plugins that generate derived data on-the-fly, or expose data that
+aren't typically considered "databases" such as live financial market
+data and local SNMP and sensor data. Once the data is connected to
+Tartarus, clients can use the existing APIs to access it.
+
+# OVERVIEW
 
 ## Data Source
 
@@ -68,23 +96,16 @@ Tartarus allows incoming connections via a transport, like ZeroMQ,
 nanomsg, HTTP, WebSockets, or plain TCP. Multiple transports can be
 configured, allowing multiple types of clients.
 
-## Message
+## Messages
 
-Tartarus messages can be serialized by one of many types of message
-format, including Sereal, Protocol Buffers, MessagePack, Cap'n Proto,
-JSON, BSON, and more.
+[Tartarus messages](https://metacpan.org/pod/Tartarus::Message) can be serialized by one of many
+types of message format using a [Tartarus::Codec](https://metacpan.org/pod/Tartarus::Codec), including Sereal,
+Protocol Buffers, MessagePack, Cap'n Proto, JSON, BSON, and more.
 
 Tartarus messages create a common data structure so that different data
 sources can be used by the same program.
 
 # ATTRIBUTES
-
-## message
-
-    message:
-        $class: Tartarus::Message::Sereal
-
-The message type to use
 
 ## transport
 
@@ -92,6 +113,8 @@ The message type to use
         $class: Tartarus::Transport::ZeroMQ
         $args:
             endpoint: tcp://127.0.0.1:7000
+            codec:
+                $class: Tartarus::Codec::Sereal
 
 The transport layer to use
 
@@ -123,6 +146,7 @@ Start the daemon.
 - [Tartarus::DataSource](https://metacpan.org/pod/Tartarus::DataSource)
 - [Tartarus::Transport](https://metacpan.org/pod/Tartarus::Transport)
 - [Tartarus::Message](https://metacpan.org/pod/Tartarus::Message)
+- [Tartarus::Codec](https://metacpan.org/pod/Tartarus::Codec)
 
 # AUTHOR
 

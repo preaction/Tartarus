@@ -36,6 +36,34 @@ migration of data between backend data platforms, and enables
 scalability features like sharding and caching that the backend data
 platform may not support.
 
+=head2 Database Agnostic
+
+Tartarus allows for easy querying of data from any kind of data source.
+Using Tartarus APIs, data can be moved from one data source to another
+with minimal effort.
+
+=head2 Compatible with Any Language
+
+Tartarus allows requests in multiple formats over multiple types of
+transports. If you want to write data using JSON over WebSockets, and
+read data using Protobuf over ZeroMQ sockets, you can.
+
+=head2 Data Events
+
+As requests and responses are made through Tartarus, events are generated
+that can be listened to. These event streams can trigger processing jobs,
+allowing you to respond to your data in real time.
+
+=head2 Data On-The-Fly
+
+The Tartarus API is simple, which allows for easy extending. You can
+write plugins that generate derived data on-the-fly, or expose data that
+aren't typically considered "databases" such as live financial market
+data and local SNMP and sensor data. Once the data is connected to
+Tartarus, clients can use the existing APIs to access it.
+
+=head1 OVERVIEW
+
 =head2 Data Source
 
 Tartarus collects multiple L<data sources|Tartarus::DataSource>,
