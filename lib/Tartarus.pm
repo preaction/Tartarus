@@ -56,11 +56,16 @@ allowing you to respond to your data in real time.
 
 =head2 Data On-The-Fly
 
-The Tartarus API is simple, which allows for easy extending. You can
-write plugins that generate derived data on-the-fly, or expose data that
-aren't typically considered "databases" such as live financial market
-data and local SNMP and sensor data. Once the data is connected to
-Tartarus, clients can use the existing APIs to access it.
+You can write plugins that generate derived data on-the-fly, or expose
+data that aren't typically considered "databases" such as live financial
+market data and local SNMP and sensor data. Once the data is connected
+to Tartarus, clients can use the existing APIs to access it.
+
+=head2 Use Your Own Database
+
+Tartarus is not a database, so if you need querying features only your
+database has, you can still connect directly to your database. Use
+Tartarus when you need to, and connect directly when you want.
 
 =head1 OVERVIEW
 
